@@ -1,3 +1,22 @@
+#
+
+```
+2025-02-09 16:33:22.517 [error] [Window] [Extension Host] Error: Could not connect to debug target at http://localhost:24678: Could not find any debuggable target
+```
+
+package.json
+誤
+
+```
+dev": "nuxt dev --inspect",
+```
+
+正
+
+```
+"dev": "nuxt dev --inspect=0.0.0.0:24678",
+```
+
 # 起動
 
 docker compose up --build
