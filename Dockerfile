@@ -5,11 +5,16 @@ ENV LANG=C.UTF-8 \
 
 WORKDIR /app
 
+# Install app dependencies
 COPY package*.json ./
+
 RUN npm install
 
+# Bundle app source
 COPY . .
 
-EXPOSE 3000
+# Expose ports
+EXPOSE 3000 24678
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+# Start the app
+CMD [ "npm", "run", "dev" ]
