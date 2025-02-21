@@ -1,15 +1,26 @@
-FROM node:20
+# ベースイメージとして軽量な Node.js イメージを使用
+FROM node:lts-alpine
 
-ENV LANG=C.UTF-8 \
-    TZ=Asia/Tokyo
+# 環境変数の設定
+ENV NODE_ENV=development
+ENV HOST=0.0.0.0
+ENV CHOKIDAR_USEPOLLING=true
+# ファイル変更を監視するため
 
-WORKDIR /app
+# 作業ディレクトリの作成
+WORKDIR /usr/src/app
 
-COPY package*.json ./
+# パッケージファイルをコピー（キャッシュ活用のため先にコピー）
+COPY ["package.json", "package-lock.json*", "./"]
+
+# 開発依存関係も含めてインストール
 RUN npm install
 
+# アプリケーションコードをコピー
 COPY . .
 
-EXPOSE 3000
+# Nuxt のデフォルトポートとデバッグポートを公開
+EXPOSE 3000 9229
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+# Nuxt 開発サーバーを起動（デバッグモードも対応）
+CMD ["npm", "run", "dev"]
