@@ -3,6 +3,9 @@
 docker compose up --build
 （npm install は Docker 内で行われるので自分でやらなくても OK のはず）
 
+# ホットリロード
+デフォで有効らしい
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
